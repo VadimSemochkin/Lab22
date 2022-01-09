@@ -19,8 +19,8 @@ namespace Lab22
             Func<Task<int[]>, int> func2 = new Func<Task<int[]>, int>(Method2);
             Task<int> task2 = task1.ContinueWith<int>(func2);
 
-            Func<Task<int[]>,int> func3 = new Func<Task<int[]>,int>(Method3);
-            Task<int> task3 = task2.ContinueWith<int>(func3);
+            Func<Task<int[]>, int> func3 = new Func<Task<int[]>, int>(Method3);
+            Task<int> task3 = task1.ContinueWith<int>(func3);
 
             task1.Start();
 
@@ -36,6 +36,7 @@ namespace Lab22
                 array[i] = rand.Next(0, 100);
                 Console.Write($"{array[i]} ");
             }
+            Console.WriteLine();
             return array;
         }
         static int Method2(Task<int[]> task)
@@ -53,7 +54,7 @@ namespace Lab22
         static int Method3(Task<int[]> task)
         {
             int[] array = task.Result;
-            int max = 0;
+            int max = array[0];
             for (int i = 0; i < array.Count(); i++)
             {
                 if (array[i]>max)
